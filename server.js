@@ -1,6 +1,8 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
+
+const port = process.env.PORT || 3000;
 var app= express();
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
@@ -15,9 +17,9 @@ app.use((req,res,next) => {
   });
   next();
 });
-app.use((req,res,next) =>
-  res.render('maintenance.hbs')
-);
+// app.use((req,res,next) =>
+//   res.render('maintenance.hbs')
+// );
 
 app.use(express.static(__dirname + '/public'));
 
@@ -48,6 +50,6 @@ app.get('/bad',(req,res)=> {
     errorMessage: 'unable to fulfill this request'
   });
 });
-app.listen(3000, () => {
-  console.log("Sever is up on 3000");
+app.listen(port, () => {
+  console.log("Sever is up on" + port);
 });
